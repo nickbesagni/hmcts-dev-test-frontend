@@ -38,3 +38,6 @@ version
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# TODO: Remove this when the issue is fixed 
+!src\main\views\govuk\macros\attributes.njk
