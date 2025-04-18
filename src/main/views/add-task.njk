@@ -64,11 +64,13 @@
   }) }}
 
   {{ govukDateInput({
-    label: {
-      text: "Due date"
+    fieldset: {
+    legend: {
+        text: "Due date"
+        }
     },
     id: "dueDateTime",
-    name: "dueDateTime"
+    namePrefix: "dueDateTime"
   }) }}
 
 {% endcall %}

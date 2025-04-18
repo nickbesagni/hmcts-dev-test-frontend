@@ -1,4 +1,4 @@
-const { I } = inject();
+import { I } from './common'
 
 Given('I am on the add task form', () => {
   I.amOnPage('/add-task');
