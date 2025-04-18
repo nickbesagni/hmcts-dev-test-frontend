@@ -1,10 +1,11 @@
 {% from "govuk/components/task-list/macro.njk" import govukTaskList %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% extends "template.njk" %}
 
 {% block content %}
   <h1 class="govuk-heading-xl">Welcome to your tasks!</h1>
-
+  {{ govukButton({ text: "Add a new task", href: "/add-task" }) }}
   {% if taskListData.items.length > 0 %}
     {{ govukTaskList(taskListData) }}
   {% endif %}
