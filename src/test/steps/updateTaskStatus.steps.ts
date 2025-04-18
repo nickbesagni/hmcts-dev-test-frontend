@@ -1,4 +1,4 @@
-const { I } = inject();
+import { I } from './common'
 
 Given('I am on the task view page for task with id {int}', (taskId: number) => {
   I.amOnPage(`/task/${taskId}`);
