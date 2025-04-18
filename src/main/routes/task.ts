@@ -1,6 +1,7 @@
 import { Application } from 'express';
 import axios from 'axios';
 import { Task } from '../types/task';
+import updateTaskStatusRoutes from './updateTaskStatus';
 
 export default function (app: Application): void {
   app.get('/task/:id', async (req, res) => {
@@ -15,4 +16,6 @@ export default function (app: Application): void {
       res.render('task-view', {});
     }
   });
+
+  updateTaskStatusRoutes(app);
 }

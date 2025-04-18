@@ -4,12 +4,12 @@
 {% extends "template.njk" %}
 
 {% block content %}
-    {{ govukBackLink({
+  {{ govukBackLink({
     text: "Back",
     href: "/"
-    }) }}
-    {% if task %}
-    
+  }) }}
+
+  {% if task %}
     <h1 class="govuk-heading-xl">{{ task.title }}</h1>
 
     {{ govukSummaryList({
@@ -28,6 +28,15 @@
           },
           value: {
             text: task.status
+          },
+          actions: {
+            items: [
+              {
+                href: "/task/" + task.id + "/update-status?status=" +  ("Not done" if task.status == "Completed" else "Completed") ,
+                text: "Mark as not done" if task.status == "Completed" else "Mark as complete",
+                visuallyHiddenText: "status"
+              }
+            ]
           }
         },
         {
