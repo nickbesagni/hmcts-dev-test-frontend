@@ -6,7 +6,6 @@
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/back-link/macro.njk" import govukBackLink %}
 
-
 {% extends "template.njk" %}
 
 {% block content %}
@@ -26,68 +25,78 @@
   {% if error %}
     <p class="govuk-error-message">{{ error }}</p>
   {% endif %}
+
   <form method="post" action="/task/new">
+    {{ govukInput({
+      label: {
+        text: "Title"
+      },
+      id: "title",
+      name: "title",
+      value: formData and formData.title,
+      errorMessage: { 
+        text: getFieldErrorMessage(errors, "title") 
+        } if errors|length and getFieldErrorMessage(errors, "title") else null
+    }) }}
 
-  {{ govukInput({
-    label: {
-      text: "Title"
-    },
-    id: "title",
-    name: "title"
-  }) }}
+    {{ govukTextarea({
+      label: {
+        text: "Description"
+      },
+      id: "description",
+      name: "description",
+      value: formData and formData.description
+    }) }}
 
-  {{ govukTextarea({
-    label: {
-      text: "Description"
-    },
-    id: "description",
-    name: "description"
-  }) }}
-
-  {{ govukSelect({
-    label: {
-      text: "Status"
-    },
-    id: "status",
-    name: "status",
-    items: [
-    {
-      value: "Not done",
-      text: "Not done",
-      selected: true
-    },
-    {
-      value: "Complete",
-      text: "Complete"
-    }
-    ]
-  }) }}
-
-  {{ govukDateInput({
-    fieldset: {
-    legend: {
-        text: "Due date"
+    {{ govukSelect({
+      label: {
+        text: "Status"
+      },
+      id: "status",
+      name: "status",
+      items: [
+        {
+          value: "Not done",
+          text: "Not done",
+          selected: formData and formData.status == 'Not done'
+        },
+        {
+          value: "Complete",
+          text: "Complete",
+          selected: formData and formData.status == 'Complete'
         }
-    },
-    id: "dueDateTime",
-    namePrefix: "dueDateTime"
-  }) }}
+      ]
+    }) }}
 
-{% endcall %}
+    {{ govukDateInput({
+      fieldset: {
+        legend: {
+          text: "Due date",
+          classes: "govuk-label--error" if errors|length and getFieldErrorMessage(errors, "dueDateTime") else ""
+        }
+      },
+      id: "dueDateTime",
+      namePrefix: "dueDateTime",
+      value: formData and formData.dueDateTime,
+      errorMessage: { 
+        text: getFieldErrorMessage(errors, "dueDateTime") 
+        } if errors|length and getFieldErrorMessage(errors, "dueDateTime") else null
+    }) }}
 
     <div class="govuk-button-group">
-        {{ govukButton({
+      {{ govukButton({
         text: "Save task",
         classes: "govuk-button--primary",
         attributes: {
-            type: "submit"
+          type: "submit"
         }
-        }) }}
-        {{ govukButton({
+      }) }}
+      {{ govukButton({
         text: "Cancel",
         href: "/",
         classes: "govuk-button--secondary"
-        }) }}
+      }) }}
     </div>
-    </form>
+  </form>
+{% endcall %}
 {% endblock %}
