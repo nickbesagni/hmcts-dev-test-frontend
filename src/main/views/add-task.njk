@@ -77,7 +77,14 @@
       },
       id: "dueDateTime",
       namePrefix: "dueDateTime",
-      value: formData and formData.dueDateTime,
+      value: {
+        day: formData and formData['dueDateTime-day'],
+        month: formData and formData['dueDateTime-month'],
+        year: formData and formData['dueDateTime-year']
+      },
+      hint: {
+        text: "Must be in dd mm yyyy format. For example, 27 03 2007"
+      },
       errorMessage: { 
         text: getFieldErrorMessage(errors, "dueDateTime") 
         } if errors|length and getFieldErrorMessage(errors, "dueDateTime") else null
