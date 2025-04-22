@@ -8,7 +8,7 @@ export default function (app: Application): void {
   app.get('/task/:id', async (req, res) => {
     try {
       const taskId = req.params.id;
-      const response = await axios.get(`http://localhost:4000/api/v1/tasks/${taskId}`);
+      const response = await axios.get(`${process.env.API_URL || 'http://localhost:4000/api/v1/tasks'}/${taskId}`);
       const task: Task = response.data;
 
       // Format the dueDateTime to a user-readable format

@@ -9,11 +9,11 @@ export default function (app: Application): void {
       const { status } = req.query;
 
       // Fetch the current task data
-      const response = await axios.get(`http://localhost:4000/api/v1/tasks/${taskId}`);
+      const response = await axios.get(`${process.env.API_URL || 'http://localhost:4000/api/v1/tasks'}/${taskId}`);
       const task: Task = response.data;
 
       // Update only the status field
-      await axios.put(`http://localhost:4000/api/v1/tasks/${taskId}`, {
+      await axios.put(`${process.env.API_URL || 'http://localhost:4000/api/v1/tasks'}/${taskId}`, {
         title: task.title,
         description: task.description,
         status,

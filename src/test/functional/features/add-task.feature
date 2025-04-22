@@ -8,8 +8,10 @@ Feature: Add Task Functionality
     Given I am on the add task form
     When I fill in "Title" with "Test Task"
     And I fill in "Description" with "Test Description"
-    And I select "Pending" from "Status"
-    And I fill in "Due Date and Time" with "2023-12-31T23:59"
+    And I select "Not done" from "Status"
+    And I fill in "Day" with "10"
+    And I fill in "Month" with "10"
+    And I fill in "Year" with "2025"
     And I press "Save task"
     Then I should be redirected to the home page
     And I should see "Test Task" in the task list
