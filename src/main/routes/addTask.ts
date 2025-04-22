@@ -2,14 +2,13 @@ import { Application } from 'express';
 import axios from 'axios';
 import moment from 'moment';
 
-interface FieldError {
+interface Error {
   field: string;
   message: string;
 }
 
-function getFieldErrorMessage(errors: FieldError[], field: string): string | null {
+function getFieldErrorMessage(errors: Error[], field: string): string | null {
   const error = errors.find(e => e.field === field);
-  console.log(errors);
   return error ? error.message : null;
 }
 
