@@ -16,7 +16,7 @@
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "test:routes": "jest -c jest.routes.config.js",
-    "test:functional": "NODE_TLS_REJECT_UNAUTHORIZED=0 codeceptjs run --steps",
+    "test:functional": "set TS_NODE_PROJECT=src/test/tsconfig.json && codeceptjs run --config src/test/codecept.conf.ts",
     "cichecks": "yarn install && yarn build && yarn rebuild puppeteer && yarn lint && yarn test && yarn test:routes && yarn test:a11y",
     "prepare": "husky install"
   },
@@ -76,7 +76,7 @@
     "chai": "^4.3.7",
     "chai-as-promised": "^8.0.0",
     "chokidar": "^3.6.0",
-    "codeceptjs": "^3.5.3",
+    "codeceptjs": "^3.7.3",
     "copy-webpack-plugin": "9.1.0",
     "css-loader": "^7.0.0",
     "debug": "^4.3.4",

@@ -1,3 +1,5 @@
+/// <reference types='codeceptjs' />
+
 import { I } from './common'
 
 Given('I am on the add task form', () => {
@@ -10,6 +12,14 @@ When('I fill in {string} with {string}', (field: string, value: string) => {
 
 When('I select {string} from {string}', (value: string, field: string) => {
   I.selectOption(field, value);
+});
+
+When('I fill in {string} with {string}', (field: string, value: string) => {
+  I.fillField(field, value);
+});
+
+When('I fill in {string} with {string}', (field: string, value: string) => {
+  I.fillField(field, value);
 });
 
 When('I fill in {string} with {string}', (field: string, value: string) => {

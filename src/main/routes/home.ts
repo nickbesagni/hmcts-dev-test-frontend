@@ -5,7 +5,7 @@ import { Task, TaskListData, TaskListItem } from '../types/task';
 export default function (app: Application): void {
   app.get('/', async (req, res) => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/tasks');
+      const response = await axios.get(process.env.API_URL || 'http://localhost:4000/api/v1/tasks');
       const tasks: Task[] = response.data;
 
       const taskListItems: TaskListItem[] = tasks.map(task => ({

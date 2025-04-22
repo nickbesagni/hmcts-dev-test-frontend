@@ -4,14 +4,15 @@ process.on('unhandledRejection', reason => {
 });
 
 export const config = {
-  TEST_URL: process.env.TEST_URL || 'http://localhost:3100',
+  TEST_URL: process.env.TEST_URL || 'https://localhost:3100',
+  TEST_API_URL: process.env.TEST_API_URL || 'http://localhost:4000/api/v1',
   TestHeadlessBrowser: process.env.TEST_HEADLESS ? process.env.TEST_HEADLESS === 'true' : true,
   TestSlowMo: 250,
   WaitForTimeout: 10000,
 
   Gherkin: {
-    features: './src/test/functional/features/**/*.feature',
-    steps: ['./src/test/steps/common.ts'],
+    features: ['./functional/features/home-page.feature', './functional/features/add-task.feature', './functional/features/update-task-status.feature'],
+    steps: ['./steps/common.ts', './steps/addTask.steps.ts'],
   },
   helpers: {},
 };
@@ -25,5 +26,5 @@ config.helpers = {
     waitForAction: 1000,
     waitForNavigation: 'networkidle0',
     ignoreHTTPSErrors: true,
-  },
+  }
 };

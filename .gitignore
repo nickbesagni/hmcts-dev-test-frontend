@@ -41,3 +41,4 @@ version
 
 # TODO: Remove this when the issue is fixed 
 !src\main\views\govuk\macros\attributes.njk
+.vscode/settings.json
