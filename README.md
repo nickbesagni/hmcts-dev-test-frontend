@@ -14,7 +14,7 @@ This is a simple task management application built with Express.js, Nunjucks, an
 ## Installation
 
 1. Clone the repository:
-   ```sh
+```sh
    git clone https://github.com/nickbesagni/hmcts-dev-test-frontend
    cd task-management-app
 ```
