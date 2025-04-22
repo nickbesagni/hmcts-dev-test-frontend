@@ -6,7 +6,7 @@ import { Task, TaskListData, TaskListItem } from '../types/task';
 export default function (app: Application): void {
   app.get('/', async (req, res) => {
     try {
-      const response = await axios.get('http://localhost:4000/api/v1/tasks');
+      const response = await axios.get(process.env.API_URL || 'http://localhost:4000/api/v1/tasks');
       let tasks: Task[] = response.data;
 
       // Sort tasks by priority ('Not done' first, then 'Completed') and by dueDateTime in chronological order

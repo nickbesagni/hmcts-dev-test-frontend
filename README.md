@@ -2,6 +2,8 @@
 
 This is a simple task management application built with Express.js, Nunjucks, and Axios. The application allows users to add, view, and manage tasks.
 
+[Repo for back-end application](https://github.com/nickbesagni/hmcts-dev-test-backend)
+
 ## Features
 
 - Add new tasks with a title, description, status, and due date.
@@ -36,7 +38,7 @@ To run the routing tests, use the following command:
 yarn test:routing
 ```
 
-N.B.: Functional tests are not yet implemented.
+N.B.: Functional tests require both the frontend and backend to be running.
 
 ## Project Structure
 ```

@@ -1,20 +1,46 @@
-import { config as testConfig } from '../config';
+/// <reference types='codeceptjs' />
+/// <reference path="../functional/steps.d.ts" />
 
 export const { I } = inject();
 
-export const iAmOnPage = (text: string): void => {
-  const url = new URL(text, testConfig.TEST_URL);
-  if (!url.searchParams.has('lng')) {
-    url.searchParams.set('lng', 'en');
-  }
-  I.amOnPage(url.toString());
-};
-Given('I go to {string}', iAmOnPage);
+// --- Step Definitions ---
 
-Then('the page URL should be {string}', (url: string) => {
-  I.waitInUrl(url);
+When('I go to {string}', (path: string) => {
+  I.amOnPage(path);
+});
+
+When('I press {string}', (button: string) => {
+  I.click(button);
+});
+
+When('I select {string} from {string}', (value: string, field: string) => {
+  I.selectOption(field, value);
+});
+
+Given('I am on the add task form', () => {
+  I.amOnPage('/add-task');
+});
+
+When('I click the {string} link', (linkText: string) => {
+  I.click(linkText);
+});
+
+When('I fill in {string} with {string}', (field: string, value: string) => {
+  I.fillField(field, value);
 });
 
 Then('the page should include {string}', (text: string) => {
   I.waitForText(text);
+});
+
+Then('the home page loads', () => {
+  I.waitForText('Welcome'); 
+});
+
+Then('I should be redirected to the home page', () => {
+  I.seeInCurrentUrl('/');
+});
+
+Then('I should see {string} in the task list', (taskTitle: string) => {
+  I.see(taskTitle);
 });

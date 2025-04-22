@@ -22,30 +22,30 @@ export default function (app: Application): void {
   app.post('/task/new', async (req, res) => {
     const { title, description, status } = req.body;
     const { 'dueDateTime-day': day, 'dueDateTime-month': month, 'dueDateTime-year': year } = req.body;
-
-    // Combine date input values into a single dueDateTime string
-    const combinedDueDateTime = `${year}-${month}-${day}`;
-
-    // Validation
+  
     const errors = [];
-    if (!title) {
-      errors.push({ field: 'title', message: 'Enter a title' });
-    }
-    if (!day || !month || !year || !moment(combinedDueDateTime, 'YYYY-MM-DD', true).isValid()) {
-      errors.push({ field: 'dueDateTime', message: 'Enter a valid due date' });
-    }
-
+    if (!title) errors.push({ field: 'title', message: 'Enter a title' });
+    if (!day || !month || !year) errors.push({ field: 'dueDateTime', message: 'Enter a due date' });
+  
     if (errors.length > 0) {
       return res.render('add-task', { errors, formData: req.body, getFieldErrorMessage });
     }
-
+  
+    // Only construct the date if all fields are present
+    const dueDateString = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+    const formattedDueDateTime = moment(dueDateString, "YYYY-MM-DD").format("YYYY-MM-DDT00:00:00");
+  
     try {
-      const formattedDueDateTime = moment(combinedDueDateTime).format("YYYY-MM-DDTHH:mm:ss");
-      await axios.post('http://localhost:4000/api/v1/tasks', { title, description, status, dueDateTime: formattedDueDateTime });
+      await axios.post(process.env.API_URL || 'http://localhost:4000/api/v1/tasks', {
+        title,
+        description,
+        status,
+        dueDateTime: formattedDueDateTime
+      });
       res.redirect('/');
     } catch (error) {
       console.error('Error submitting form:', error);
       res.render('add-task', { error: 'Failed to add task', formData: req.body, getFieldErrorMessage });
     }
-  });
+  });  
 }
